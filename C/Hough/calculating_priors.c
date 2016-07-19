@@ -24,14 +24,13 @@ struct priors *create_prior_arrays(int no_of_alphas, int no_of_radii){
 }
 
 //deletes arrays holding the priors
-void delete_priors(){
-
+void delete_priors(struct priors *priors){
+	free(priors->p_alpha);
+	free(priors->p_r_given_alpha);
+	free(priors->total_prior);
+	free(priors);
 }
 
-int return_negative(){
-	return -1;
-	
-}
 
 
 void calculate_priors(struct alphas_and_radii *a_r, struct prior_parameters *parameters, struct priors *priors){
@@ -104,6 +103,6 @@ float calculate_prior_r_given_alpha(float radius, float alpha, float cr, float w
 	return prior_r;
 }
 
-void calculate_total_prior(){
-
+void calculate_and_store_priors(){
+	
 }

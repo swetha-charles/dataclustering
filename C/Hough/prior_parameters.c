@@ -29,8 +29,3 @@ void destroy_prior_parameters(struct prior_parameters *parameters){
 	free(parameters);
 
 }
-
-int main(){
-	printf("Everything is OK! for now%d\n", 5);
-	return 0;
-}
