@@ -30,7 +30,7 @@ struct alphas_and_radii *create_alphas_and_radii(float delta_alpha, float delta_
 	assert(alpha_array != NULL); //if assert fails, program will abort
 	memset(alpha_array, 0, sizeof(float) * no_of_alphas); //fill it with zeroes
 
-	//get memeory for radius array
+	//get memory for radius array
 	float *radius_array = malloc(sizeof(float) * no_of_radii);  
 	assert(radius_array != NULL);
 	memset(radius_array, 0, sizeof(float)*no_of_radii); //fill it with zeroes
@@ -75,26 +75,3 @@ void destroy_alphas_and_radii(struct alphas_and_radii *alphas_and_radii_to_destr
 
 }
 
-int main(){
-	struct alphas_and_radii *space = create_alphas_and_radii(0.05, 0.05);
-	float *current_alpha = space->alpha_array_pointer;
-	float *current_radius = space->radius_array_pointer;
-
-
-	int i = 0;
-	for(; i < (space->no_of_alphas); i++){
-		printf("%f\n", *current_alpha);
-		current_alpha++;
-	}
-
-
-	i = 0;
-	for(; i < (space->no_of_radii); i++){
-		printf("%f\n", *current_radius);
-		current_radius++;
-	}
-
-	destroy_alphas_and_radii(space);
-
-	return 0;
-}

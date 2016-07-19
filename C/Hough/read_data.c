@@ -46,11 +46,12 @@ float convert_char_to_int(char *text){
 
 void open_file_read_line_store_data(struct data *data){
        //opens file in read mode
-    FILE* stream = fopen("DATA/input", "r");
+    FILE* stream = fopen("DATA/x.dat", "r");
     char line[1024];
      //fgets keeps going till it reads 1023 characters OR EOF OR return 
     while (fgets(line, 1024, stream)){
         char* tmp = strdup(line);
+        //nb: the third variable, 0 or i, is used to indicate whether we're reading x data or y data 
         read_line(tmp, data, 0);
         // NOTE strtok clobbers tmp
         free(tmp);
@@ -59,7 +60,7 @@ void open_file_read_line_store_data(struct data *data){
     //reset counter
      i = 0;
 
-    stream = fopen("DATA/input", "r");
+    stream = fopen("DATA/y.dat", "r");
     char line2[1024];
      //fgets keeps going till it reads 1023 characters OR EOF OR return 
     while (fgets(line2, 1024, stream)){
