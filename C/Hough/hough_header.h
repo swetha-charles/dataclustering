@@ -21,8 +21,8 @@ void destroy_prior_parameters(struct prior_parameters *parameters);
 struct alphas_and_radii{
 
 	float *alpha_array_pointer;
-	int no_of_alphas;
 	float *radius_array_pointer;
+	int no_of_alphas;
 	int no_of_radii;
 	float da;
 	float dr;
@@ -42,9 +42,10 @@ struct priors{
 };
 struct priors;
 void calculate_priors();
+struct priors *create_prior_arrays(int no_of_alphas, int no_of_radii);
 float calculate_p_alpha(float alpha, float ca);
 float calculate_prior_r_given_alpha(float radius, float alpha, float cr, float w1, float w2);
-int return_negative();
+void destroy_priors(struct priors *priors);
 
 //process data
 struct data{

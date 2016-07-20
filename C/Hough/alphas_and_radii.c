@@ -33,7 +33,7 @@ struct alphas_and_radii *create_alphas_and_radii(float delta_alpha, float delta_
 	//get memory for radius array
 	float *radius_array = malloc(sizeof(float) * no_of_radii);  
 	assert(radius_array != NULL);
-	memset(radius_array, 0, sizeof(float)*no_of_radii); //fill it with zeroes
+
 	
 	int i =0;//weird workaround for C's compiler :/
 	//fill the alpha arrays with incrementing angles from 

@@ -9,7 +9,7 @@
 
 //creates arrays to hold the priors
 struct priors *create_prior_arrays(int no_of_alphas, int no_of_radii){
-	struct priors *priors = malloc(sizeof(priors));
+	struct priors *priors = malloc(sizeof(struct priors));
 
 	float *p_alpha = malloc(sizeof(float) * no_of_alphas);
 	priors->p_alpha = p_alpha; //set up storage for p alpha
@@ -24,11 +24,15 @@ struct priors *create_prior_arrays(int no_of_alphas, int no_of_radii){
 }
 
 //deletes arrays holding the priors
-void delete_priors(struct priors *priors){
+void destroy_priors(struct priors *priors){
 	free(priors->p_alpha);
+	
 	free(priors->p_r_given_alpha);
+	
 	free(priors->total_prior);
+	
 	free(priors);
+	
 }
 
 
@@ -41,7 +45,7 @@ void calculate_priors(struct alphas_and_radii *a_r, struct prior_parameters *par
 
 	//outer loop iterates over the alphas
 	for(i = 0; i < a_r->no_of_alphas; i++){
-		float alpha = *(alpha_array+i); //pull out current value of alpha
+		float alpha = alpha_array[i]; //pull out current value of alpha
 		float p_alpha = calculate_p_alpha(alpha, parameters->ca); //calculate p_alpha and store in a temporary variable
 		priors->p_alpha[i] = p_alpha; //store in prior storage array
 
@@ -49,17 +53,17 @@ void calculate_priors(struct alphas_and_radii *a_r, struct prior_parameters *par
 		for(j = 0;j<a_r->no_of_radii; j++){
 			float radius = *(radii_array + j);
 			float p_r_given_alpha = calculate_prior_r_given_alpha(radius, alpha, parameters->cr, parameters->w1, parameters->w2); //calculaye p_r_given_alpha
-			priors->p_r_given_alpha[(i*alphas)+j] = p_r_given_alpha; //store it in a "2D" array //WRITE TEST
+			priors->p_r_given_alpha[(j*alphas)+i] = p_r_given_alpha; //store it in a "2D" array //WRITE TEST
 
 			float total_prior = p_r_given_alpha * p_alpha; //calculate total prior
-			priors->total_prior[(i*alphas) + j] = total_prior; //store this in 2D array. //WRITE TEST
+			priors->total_prior[(j*alphas) + i] = total_prior; //store this in 2D array. //WRITE TEST
 		}
 	}
 }
 
 float calculate_p_alpha(float alpha, float ca){
 	float s = 2*(1-ca)/((pi*pi) * (1+ca));
-	float result;
+	float result = 0;
 	
 	if ((alpha >= -pi/4) && (alpha <= pi/4)){
 		result = -s*alpha + 1/(2*pi);
@@ -71,7 +75,7 @@ float calculate_p_alpha(float alpha, float ca){
     else if (alpha <= 5*pi/4){
       	 result = -s*alpha + (5 - 3*ca)/(2*pi*(1 + ca));
     }
-    else{
+    else if ( alpha<= (7*pi)/4){
        	 result = s*alpha + (7*ca - 5)/(2*pi*(1 + ca));
     }                              
        return result;
@@ -103,6 +107,3 @@ float calculate_prior_r_given_alpha(float radius, float alpha, float cr, float w
 	return prior_r;
 }
 
-void calculate_and_store_priors(){
-	
-}
