@@ -18,7 +18,7 @@
 * the alpha and radius arrays in the parameter space. 
 *
 */
-struct alphas_and_radii *create_alphas_and_radii(float delta_alpha, float delta_r){
+struct alphas_and_radii *create_alphas_and_radii(double delta_alpha, double delta_r){
 
 	//calculate number of angles we will analyze
 	int no_of_alphas = ((2*M_PI)/delta_alpha) + 1; //is the plus one needed? 
@@ -26,12 +26,12 @@ struct alphas_and_radii *create_alphas_and_radii(float delta_alpha, float delta_
 	int no_of_radii = ((3)/delta_r) + 1;
 
 	//get memory for alpha array
-	float *alpha_array = malloc(sizeof(float) * no_of_alphas);  
+	double *alpha_array = malloc(sizeof(double) * no_of_alphas);  
 	assert(alpha_array != NULL); //if assert fails, program will abort
-	memset(alpha_array, 0, sizeof(float) * no_of_alphas); //fill it with zeroes
+	memset(alpha_array, 0, sizeof(double) * no_of_alphas); //fill it with zeroes
 
 	//get memory for radius array
-	float *radius_array = malloc(sizeof(float) * no_of_radii);  
+	double *radius_array = malloc(sizeof(double) * no_of_radii);  
 	assert(radius_array != NULL);
 
 	

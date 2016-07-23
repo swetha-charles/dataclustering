@@ -6,8 +6,8 @@
 int i = 0;
 
 struct data *create_data_array(int size){
-    float *data_x = malloc(sizeof(float) * size);
-    float *data_y = malloc(sizeof(float) * size);
+    double *data_x = malloc(sizeof(double) * size);
+    double *data_y = malloc(sizeof(double) * size);
 
     struct data *data = malloc(sizeof(data));
     data->data_x = data_x;
@@ -27,7 +27,7 @@ void read_line(char line[], struct data *data, int signal)
 
     //strtok breaks up the given line based on the ',' delimeter
     for (tok = strtok(line, ","); tok!=NULL; tok = strtok(NULL, ",\n")){
-        float x = convert_char_to_int(tok);
+        double x = convert_char_to_int(tok);
         if(signal == 0){
              store_x1_data(data, x);
 
@@ -39,7 +39,7 @@ void read_line(char line[], struct data *data, int signal)
     }
 }
 
-float convert_char_to_int(char *text){
+double convert_char_to_int(char *text){
     //TODO
     return 0;    
 }
@@ -71,12 +71,12 @@ void open_file_read_line_store_data(struct data *data){
     }
 }
 
-void store_x1_data(struct data *data, float x1){
+void store_x1_data(struct data *data, double x1){
     data->data_x[i] = x1;
     i++;
 }
 
-void store_x2_data(struct data *data, float x2){
+void store_x2_data(struct data *data, double x2){
     data->data_y[i] = x2;
     i++;
 }
@@ -87,6 +87,3 @@ struct data *read_in_data_and_return_struct(){
     return data;
 }
 
-int main(){
-   
-}

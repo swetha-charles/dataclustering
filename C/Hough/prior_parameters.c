@@ -10,7 +10,7 @@
 
 
 
-struct prior_parameters *set_parameters(float variance_of_data, float ca, float cr, float w1, float w2){
+struct prior_parameters *set_parameters(double variance_of_data, double ca, double cr, double w1, double w2){
 	//allocate memory
 	struct prior_parameters *parameters = malloc(sizeof(struct prior_parameters));
 
