@@ -82,11 +82,12 @@ void get_p_alpha_given_x(int index,  struct ht_results *ht_results, struct alpha
 	int j = 0;
 	int sum_alpha = 0;
 	double delta_r = alphas_and_radii->dr;
+	int no_of_alphas = alphas_and_radii->no_of_alphas;
 
 	for(i =0; i < alphas_and_radii->no_of_alphas; i++){
 		
 		for(j = 0; j < alphas_and_radii->no_of_radii; j++){
-			sum_alpha += ht_results->p_r_alpha_given_x[(i * alphas_and_radii->no_of_alphas) + j];
+			sum_alpha += ht_results->p_r_alpha_given_x[(i * no_of_alphas) + j];
 		}
 		ht_results->p_alpha_given_data[(index * alphas_and_radii->no_of_alphas) + i] = sum_alpha * delta_r; 
 		sum_alpha = 0;
@@ -98,8 +99,9 @@ void get_p_r_alpha_given_x(double x1, double x2, double variance_of_data, double
 	int i = 0;
 	int j = 0;
 	int no_of_alphas = alphas_and_radii->no_of_alphas;
-	int no_of_radii = alphas_and_radii->no_of_radii;
-
+	//int no_of_radii = alphas_and_radii->no_of_radii;
+	int no_data_points = data->no_data_points;
+	//printf("Data_points: %d\n", no_data_points);
 
 		for(i = 0; i < alphas_and_radii->no_of_alphas; i++){
 			double alpha = alphas_and_radii->alpha_array_pointer[i];
@@ -113,7 +115,7 @@ void get_p_r_alpha_given_x(double x1, double x2, double variance_of_data, double
 				
 				ht_results->p_r_alpha_given_x[(j *no_of_alphas) + i] = (result); //unsure about data_point division
 			
-				ht_results->p_r_alpha_given_data[(j * no_of_radii) + i] += (result / data->no_data_points);
+				ht_results->p_r_alpha_given_data[(j * no_of_alphas) + i] += (result / no_data_points);
 
 			}
 	}
@@ -137,7 +139,7 @@ double get_p_x(double x1, double x2, double variance_of_data,struct alphas_and_r
 
 		for(j = 0; j < alphas_and_radii->no_of_radii; j++){
 			double r = alphas_and_radii->radius_array_pointer[j];
-//			prior is p(a, r)
+			//prior is p(a, r)
 			// printf("alpha: %i, r: %i\n", i, j);
 			// printf("alpha: %f, r: %f\n", alpha, r);
 			// printf("noise model: %e ", p_x_given_alpha_r(x1, x2, alpha, r, variance_of_data));
@@ -146,7 +148,7 @@ double get_p_x(double x1, double x2, double variance_of_data,struct alphas_and_r
 
 		}
 	}
-	printf("%f\n", result);
+//	printf("%f\n", result);
 	return (result * alphas_and_radii->da * alphas_and_radii->dr);
 
 }

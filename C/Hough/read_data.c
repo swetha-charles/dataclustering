@@ -12,6 +12,7 @@ struct data *create_data_array(int size){
     struct data *data = malloc(sizeof(data));
     data->data_x = data_x;
     data->data_y = data_y;
+    data->no_data_points = size;
     return data;
 };
 

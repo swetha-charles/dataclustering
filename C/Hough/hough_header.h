@@ -52,6 +52,7 @@ struct data{
 	int no_data_points;
 	double *data_x;
 	double *data_y;
+	
 };
 
 struct ht_results{
