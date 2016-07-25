@@ -80,16 +80,17 @@ void get_posterior(double x1, double x2, int i, double variance_of_data,
 void get_p_alpha_given_x(int index,  struct ht_results *ht_results, struct alphas_and_radii *alphas_and_radii){
 	int i =0;
 	int j = 0;
-	int sum_alpha = 0;
+	double sum_alpha = 0;
 	double delta_r = alphas_and_radii->dr;
 	int no_of_alphas = alphas_and_radii->no_of_alphas;
 
 	for(i =0; i < alphas_and_radii->no_of_alphas; i++){
 		
 		for(j = 0; j < alphas_and_radii->no_of_radii; j++){
-			sum_alpha += ht_results->p_r_alpha_given_x[(i * no_of_alphas) + j];
+			sum_alpha += ht_results->p_r_alpha_given_x[(j * no_of_alphas) + i];
 		}
-		ht_results->p_alpha_given_data[(index * alphas_and_radii->no_of_alphas) + i] = sum_alpha * delta_r; 
+		//printf("alpha: %i ,sum alpha: %e\n", i,sum_alpha);
+		ht_results->p_alpha_given_data[(index * no_of_alphas) + i] = sum_alpha * delta_r; 
 		sum_alpha = 0;
 	}
 }
