@@ -28,25 +28,25 @@ struct alphas_and_radii *create_alphas_and_radii(double delta_alpha, double delt
 	//get memory for alpha array
 	double *alpha_array = malloc(sizeof(double) * no_of_alphas);  
 	assert(alpha_array != NULL); //if assert fails, program will abort
-	memset(alpha_array, 0, sizeof(double) * no_of_alphas); //fill it with zeroes
+
 
 	//get memory for radius array
 	double *radius_array = malloc(sizeof(double) * no_of_radii);  
 	assert(radius_array != NULL);
 
 	
-	int i =0;//weird workaround for C's compiler :/
+	int i =0;
 	//fill the alpha arrays with incrementing angles from 
 	// - pi/4 -->> 7pi/4, increment steps of delta_alpha
-	for(; i < no_of_alphas-1 && alpha_array[i] < (7*pi)/4; i++){
-		alpha_array[i] = (-pi/4) + i*delta_alpha;
+	for(i = 0; i < no_of_alphas-1; i++){
+		alpha_array[i] = i*delta_alpha;
 	}
-	alpha_array[no_of_alphas-1] = (7*pi)/4;
+	alpha_array[no_of_alphas-1] = (2*pi);
 
 	i = 0; //reset counter
 	//fill the radius array with incrementing no_of_radii from 
 	// 0 -->> 3, increment steps of delta r
-		for(; i < no_of_radii-1 && radius_array[i] < 3; i++){
+		for(i = 0; i < no_of_radii-1; i++){ 
 		radius_array[i] = 0 + i *delta_r;
 	}
 	radius_array[no_of_radii-1] = 3;
@@ -58,8 +58,10 @@ struct alphas_and_radii *create_alphas_and_radii(double delta_alpha, double delt
 	//of array memory
 	current_alphas_and_radii->alpha_array_pointer = alpha_array;
 	current_alphas_and_radii->radius_array_pointer = radius_array;
+
 	current_alphas_and_radii->no_of_alphas = no_of_alphas;
 	current_alphas_and_radii->no_of_radii = no_of_radii;
+
 	current_alphas_and_radii->da = delta_alpha;
 	current_alphas_and_radii->dr = delta_r;
 
