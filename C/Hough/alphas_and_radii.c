@@ -21,9 +21,9 @@
 struct alphas_and_radii *create_alphas_and_radii(double delta_alpha, double delta_r){
 
 	//calculate number of angles we will analyze
-	int no_of_alphas = ((2*M_PI)/delta_alpha) + 1; //is the plus one needed? 
+	int no_of_alphas = ((2*M_PI)/delta_alpha)+1; 
 	//calculate number of radius' we will analyze
-	int no_of_radii = ((3)/delta_r) + 1;
+	int no_of_radii = ((3)/delta_r)+1;
 
 	//get memory for alpha array
 	double *alpha_array = malloc(sizeof(double) * no_of_alphas);  
@@ -36,20 +36,19 @@ struct alphas_and_radii *create_alphas_and_radii(double delta_alpha, double delt
 
 	
 	int i =0;
-	//fill the alpha arrays with incrementing angles from 
-	// - pi/4 -->> 7pi/4, increment steps of delta_alpha
-	for(i = 0; i < no_of_alphas-1; i++){
+
+	for(i = 0; i < no_of_alphas; i++){
 		alpha_array[i] = i*delta_alpha;
 	}
-	alpha_array[no_of_alphas-1] = (2*pi);
+
 
 	i = 0; //reset counter
 	//fill the radius array with incrementing no_of_radii from 
 	// 0 -->> 3, increment steps of delta r
-		for(i = 0; i < no_of_radii-1; i++){ 
-		radius_array[i] = 0 + i *delta_r;
+	for(i = 0; i < no_of_radii; i++){ 
+		radius_array[i] = i*delta_r;
 	}
-	radius_array[no_of_radii-1] = 3;
+
 
 	//get memory for parameter space
 	struct alphas_and_radii *current_alphas_and_radii = malloc(sizeof(struct alphas_and_radii));

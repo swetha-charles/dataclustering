@@ -1,161 +1,294 @@
 #include "hough_header.h"
-#include "CuTest.h"
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
 
-void test_create_alphas_and_radii_initial_a(CuTest *tc){
+int test_initial_a(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(1, 1);
 
-	double actual_alpha = alphas_and_radii->alpha_array_pointer[0];
+	double actual = alphas_and_radii->alpha_array_pointer[0];
 	
-	double expected_alpha = -0.785;
+	double expected = 0;
 	
+	destroy_alphas_and_radii(alphas_and_radii);	
 
-	CuAssertDblEquals(tc,  expected_alpha, actual_alpha, 0.05);
-	//CuAssertDblEquals(tc, actual_radius, expected_radius, 0.05);
+	if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
 
-	destroy_alphas_and_radii(alphas_and_radii);
+		return 0;
+	}
+
 
 
 }
 
-void test_create_alphas_and_radii_initial_r(CuTest *tc){
+int test_initial_r(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(1, 1);
 
 	
-	double actual_radius = alphas_and_radii->radius_array_pointer[0];
+	double actual = alphas_and_radii->radius_array_pointer[0];
 
-	double expected_radius = 0;
-
-	//CuAssertDblEquals(tc, actual_alpha, expected_alpha, 0.05);
-	CuAssertDblEquals(tc, expected_radius, actual_radius, 0.05);
+	double expected = 0;
 
 	destroy_alphas_and_radii(alphas_and_radii);
 
+	if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
 
 }
 
-void test_create_alphas_and_radii_middle_a(CuTest *tc){
+int test_middle_a(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
 
-	double actual_alpha = alphas_and_radii->alpha_array_pointer[5];
+	double actual = alphas_and_radii->alpha_array_pointer[5];
 
-	double expected_alpha = -0.535;
-
-
-	CuAssertDblEquals(tc,  expected_alpha, actual_alpha, 0.01);
-	//CuAssertDblEquals(tc, actual_radius, expected_radius, 0.01);
+	double expected = (5*0.05);
 
 	destroy_alphas_and_radii(alphas_and_radii);
+
+	if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
+
+
+	
 }
 
 
-void test_create_alphas_and_radii_middle_r(CuTest *tc){
+int test_middle_r(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
 
 	
-	double actual_radius = alphas_and_radii->radius_array_pointer[5];
+	double actual = alphas_and_radii->radius_array_pointer[5];
 
-	double expected_radius = 0.25;
-
-	//CuAssertDblEquals(tc, actual_alpha, expected_alpha, 0.01);
-	CuAssertDblEquals(tc,  expected_radius, actual_radius, 0.01);
+	double expected = 5*0.05;
 
 	destroy_alphas_and_radii(alphas_and_radii);
+
+		if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
 }
 
-void test_create_alphas_and_radii_end_a(CuTest *tc){
+int test_end_a(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
-
-	
-
-	double actual_alpha = alphas_and_radii->alpha_array_pointer[125];
-	double expected_alpha = 5.498;
-
-	CuAssertDblEquals(tc,  expected_alpha, actual_alpha, 0.01);
-//	CuAssertDblEquals(tc, actual_radius, expected_radius, 0.01);
-
+	//true number of alphas is last_index + 1
+	int last_index = (2*pi)/0.05;
+	double actual = alphas_and_radii->alpha_array_pointer[last_index];
+	double expected = (last_index * 0.05);
 	destroy_alphas_and_radii(alphas_and_radii);
+
+		if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
+
 }
 
-void test_create_alphas_and_radii_end_r(CuTest *tc){
+int test_end_r(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
-
-	double actual_radius = alphas_and_radii->radius_array_pointer[60];
-	double expected_radius = 3;
-
-
-
-//	CuAssertDblEquals(tc, actual_alpha, expected_alpha, 0.01);
-	CuAssertDblEquals(tc,  expected_radius,actual_radius, 0.01);
+	//true number of r is last_index + 1
+	int last_index = 3/0.05;
+	double actual = alphas_and_radii->radius_array_pointer[last_index];
+	double expected = (last_index * 0.05);
 
 	destroy_alphas_and_radii(alphas_and_radii);
+
+		if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
 }
 
-void test_attr_a(CuTest *tc){
+int test_no_a(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
 
 	double actual = alphas_and_radii->no_of_alphas;
-	double expected = 126;
+	double expected = ((2 * pi )/0.05) + 1;
 
-	CuAssertDblEquals(tc,  expected,actual, 0.01);
 	destroy_alphas_and_radii(alphas_and_radii);
+
+		if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
 }
 
-void test_attr_r(CuTest *tc){
+int test_no_r(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
 
 	double actual = alphas_and_radii->no_of_radii;
-	double expected = 61;
+	double expected = ((3 / 0.05)+1);
 
-	CuAssertDblEquals(tc,  expected,actual, 0.01);
 	destroy_alphas_and_radii(alphas_and_radii);
+
+		if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
 }
 
-void test_attr_dr(CuTest *tc){
+int test_dr(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
 
 	double actual = alphas_and_radii->dr;
 	double expected = 0.05;
 
-	CuAssertDblEquals(tc,  expected,actual, 0.01);
 	destroy_alphas_and_radii(alphas_and_radii);
+
+		if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
 }
 
-void test_attr_da(CuTest *tc){
+int test_da(int test_no){
 	struct alphas_and_radii *alphas_and_radii = create_alphas_and_radii(0.05, 0.05);
 
 	double actual = alphas_and_radii->da;
 	double expected = 0.05;
 
-	CuAssertDblEquals(tc,  expected,actual, 0.01);
 	destroy_alphas_and_radii(alphas_and_radii);
+
+		if(abs(expected - actual) < 0.00001){
+		printf("Passed test %i\n", test_no);
+		printf("Expected: %f\n", expected);
+		printf("Actual: %f\n", actual);
+		return 1;
+	} else {
+		printf("Failed test %i\n", test_no);
+		printf("Expected: %e\n", expected);
+		printf("Actual: %.e\n", actual);
+
+		return 0;
+	}
 }
 
 
+int main(int argc, char const *argv[])
+{
+	int total_test = 0;
+	int passed_tests = 0;
 
+	total_test++;
+	passed_tests += test_initial_r(total_test);
+	printf("\n");
+	
+	total_test++;
+	passed_tests += test_initial_a(total_test);
+	printf("\n");
+	
 
+	total_test++;
+	passed_tests += test_middle_a(total_test);
+	printf("\n");
 
+	total_test++;
+	passed_tests += test_middle_r(total_test);
+	printf("\n");
 
+	total_test++;
+	passed_tests += test_end_a(total_test);
+	printf("\n");
+	
+	total_test++;
+	passed_tests += test_end_r(total_test);
+	printf("\n");
 
- CuSuite* alpha_radii_get_suite() {
-        CuSuite* suite = CuSuiteNew();
-        SUITE_ADD_TEST(suite, test_create_alphas_and_radii_initial_a);
-        SUITE_ADD_TEST(suite, test_create_alphas_and_radii_initial_r);
-        SUITE_ADD_TEST(suite, test_create_alphas_and_radii_middle_a);
-        SUITE_ADD_TEST(suite, test_create_alphas_and_radii_middle_r);
-        SUITE_ADD_TEST(suite, test_create_alphas_and_radii_end_a);
-        SUITE_ADD_TEST(suite, test_create_alphas_and_radii_end_r);
+	total_test++;
+	passed_tests += test_no_a(total_test);
+	printf("\n");
+	
+	total_test++;
+	passed_tests += test_no_r(total_test);
+	printf("\n");
+	
+	total_test++;
+	passed_tests += test_da(total_test);
+	printf("\n");
+	
+	total_test++;
+	passed_tests += test_dr(total_test);
+	printf("\n");
+	
 
-        SUITE_ADD_TEST(suite, test_attr_a);
-        SUITE_ADD_TEST(suite, test_attr_r);
+	printf("\nTotal tests run: %i, passed: %i\n", total_test, passed_tests );
 
-        SUITE_ADD_TEST(suite, test_attr_da);
-        SUITE_ADD_TEST(suite, test_attr_dr);
-
-        
-        return suite;
-    }
-
+	return 0;
+}
