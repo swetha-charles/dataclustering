@@ -1,7 +1,7 @@
-p_r_alpha = 'posterior_p_r_alpha_given_data.txt';
+p_r_alpha = 'ORIGINAL_SIGMA_0.05/original_posterior_p_r_alpha_given_data.txt';
 p_r_alpha_I_Data = csvread(p_r_alpha);
 
-p_alpha = 'posterior_p_alpha_given_data.txt';
+p_alpha = 'ORIGINAL_SIGMA_0.05/original_posterior_p_alpha_given_data.txt';
 p_alpha_I_Data = csvread(p_alpha);
 
 
@@ -95,7 +95,9 @@ print p_r_alpha_I_x.eps -depsc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure(4)
-load mean_data.mat;
+load UV_x.dat;
+load UV_y.dat;
+X = [mean(UV_X')', mean(UV_Y')'];
 plot(X(:, 1), X(:, 2), '.');
 title('Data');
 print data.eps -depsc

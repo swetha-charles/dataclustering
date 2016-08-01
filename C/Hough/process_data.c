@@ -58,7 +58,7 @@ struct ht_results* do_ht(struct data *data, struct prior_parameters *prior_param
 		double x1 = data->data_x_mean[i];
 		double x2 = data->data_y_mean[i];
 
-		fprintf(stdout, "%i\n", i);
+		//fprintf(stdout, "%i\n", i);
 		get_posterior(x1, x2,i, prior_parameters->variance_of_data, priors, ht_results, alphas_and_radii, data);
 
 	}
@@ -118,9 +118,8 @@ void get_p_r_alpha_given_x(double x1, double x2, double variance_of_data, double
 				double r = alphas_and_radii->radius_array_pointer[j];
 
 				double result = calculate_p_r_alpha_given_x(x1, x2, variance_of_data,  alpha, r, p_x, alphas_and_radii, priors, i, j);
-				//printf("alpha: %i,alpha_val %f, r: %i, r_val :%f, p_r_alpha_given_x: %e\n",i, alpha,j,r, result);
-				
-				ht_results->p_r_alpha_given_x[(j *no_of_alphas) + i] = (result); //unsure about data_point division
+								
+				ht_results->p_r_alpha_given_x[(j *no_of_alphas) + i] = (result); 
 			
 				ht_results->p_r_alpha_given_data[(j * no_of_alphas) + i] += (result)/ (no_data_points);
 
@@ -144,7 +143,6 @@ double get_p_x(double x1, double x2, double variance_of_data,struct alphas_and_r
 	double long result = 0;
 	int i= 0;
 	int j = 0;
-	//FILE* file = fopen("debug_algol.txt", "w");
 
 	for(i = 0; i < alphas_and_radii->no_of_alphas; i++){
 		double alpha = alphas_and_radii->alpha_array_pointer[i];
@@ -167,38 +165,25 @@ double p_x_given_alpha_r(double x1, double x2, double alpha, double radius, doub
 	volatile double mu_1 = radius*cos(alpha);   
 	volatile double mu_2 = radius*sin(alpha);
 
-	// printf("%f\n",alpha);
-	// printf("%f\n", mu_1);
-	// printf("%f\n", mu_2);
 
 	float scale = 2/(3* variance_of_data * variance_of_data);
 	float inverse_covar[2][2] = {{1*scale, 0.5*scale}, {0.5*scale, 1*scale}};
 
-	//printf("%f, %f\n", inverse_covar[0][0],inverse_covar[0][1]);
-	//printf("%f, %f\n", inverse_covar[1][0],inverse_covar[1][1]);
 
 	float x_minus_mu[2][1] = {{x1 - mu_1}, {x2 - mu_2}};
 
 	float x_minus_mu_T[1][2] = {{x1 - mu_1, x2 - mu_2}};
 	float result_so_far[1][2];
 
-	// printf("%f, %f\n", x_minus_mu_T[0][0], x_minus_mu_T[0][1]);
 	double result = 0;
 
 	result_so_far[0][0] = (x_minus_mu_T[0][0] * inverse_covar[0][0]) + (x_minus_mu_T[0][1] * inverse_covar[1][0]);
 	result_so_far[0][1] = (x_minus_mu_T[0][0] * inverse_covar[0][1]) + (x_minus_mu_T[0][1] * inverse_covar[1][1]);
-
-
-	//fprintf(stdout, "%f, %f\n", result_so_far[0][0], result_so_far[0][1]);
 	
 	result = (result_so_far[0][0] * x_minus_mu[0][0]) + (result_so_far[0][1] * x_minus_mu[1][0]);
-	//fprintf(stdout, "%e\n",result );
-
 
 	double exp_value = exp( - 0.5 * result);
-	//fprintf(stdout, "%e\n",exp_value );
 	double final = (1 / (2*pi*variance_of_data*variance_of_data*sqrt(3)))*exp_value;
-	//fprintf(stdout, "%e\n",final );
 
 	return final;
 }
@@ -219,7 +204,6 @@ void savePosteriorToFile(FILE* p_r_alpha_given_data, FILE* p_alpha_given_data, s
 	int no_of_alphas = alphas_and_radii->no_of_alphas;
 	int no_of_radii = alphas_and_radii->no_of_radii;
 
-	//printf("Starting saving, alphas: %i, radii: %i\n", no_of_alphas, no_of_radii);
 	int no_of_rows = data->no_of_rows;
 
 	//print p(r, a | data) first
@@ -256,23 +240,6 @@ void savePosteriorToFile(FILE* p_r_alpha_given_data, FILE* p_alpha_given_data, s
 		fprintf(p_alpha_given_data, "\n\n");
 	}
 
-	// int index = 0;
-	// //print p(r,a | x) no
-	// for(row = 0; row < no_of_radii; row++ ){
-	// 	for(column = 0; column <no_of_alphas; column++){
-	// 		for(index = 0; index < no_of_rows; index++){
-
-	// 			fprintf(p_r_alpha_given_x_cumulative, "%e", *(ht_results->p_r_alpha_given_x_cumulative[index] + (row * no_of_alphas) + column));
-
-	// 			if(column < (no_of_rows - 1)){
-	// 			fprintf(p_r_alpha_given_x_cumulative, ", ");
-	// 			}
-	// 		fprintf(p_r_alpha_given_x_cumulative, "\n");
-	// 		}
-		
-	// 	}
-	// }
-	
 
 	fclose(p_alpha_given_data);
 	fclose(p_r_alpha_given_data );	
