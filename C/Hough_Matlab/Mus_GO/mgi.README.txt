@@ -1,0 +1,55 @@
+October 22, 2004
+
+gene_association.mgi.gz -- Contains all GO annotations for Mus musculus gene products (protein and RNA).
+
+the gene_association.mgi.gz file uses the standard file format for the gene_association files of the Gene Ontology Consortium. A more detailed description of that formate can be found at:
+http://www.geneontology.org/doc/GO.annotation.html#file
+
+This file is updated weekly.
+
+Columns:
+
+1. DB, database contributing this file (always MGI for this file).
+
+2. DB_Object_ID, MGI: (MGI's unique identifier for the mouse gene).
+
+3. DB_Object_Symbol (Official gene symbol)
+
+4. Qualifier (optional): one or more of "NOT", "contributes_to", "co-localizes_with", as qualifiers for a GO term, when needed; multiples separated by pipe (|).
+
+5. GO ID: unique number identifier for a GO term
+
+6. DB_Reference: The reference used to make the GO annotation (in this file, always "MGI:MGI:number", pointing to a reference at MGI).
+
+7. Evidence Code: Evidence code for the GO_annotation
+
+8. Evidence Code Qualifier (optional):  This contents of this field depends upon the evidence code used in field 7. For ISS, the field contains either a nucleic acid seq_id (EMBL:) or protein_id (UniProt). If the IPI evidence code is used, the field contains a protein identifier (UniProt). If IMP is used, the field contains an MGI identifier pointing to a gene allele (MGI:). If IGI, the field contains an MGI identifier for another gene at MGI (MGI:). Multiple entries are separated by pipe (|).
+
+9.  Aspect: which ontology the GO term belongs to (Process, Function, or Component).
+
+10. DB_Object_Name (Optional): Official gene name
+
+11. DB_Object_Synonym (Optional): commonly used synonyms for the gene 
+
+12. DB_Object_Type annotated: (gene, protein, RNA); always "gene" in this file.
+
+13. taxon_ID: taxonomic id for the species encoding the gene product: always "taxon:10090" in this file
+
+14. Date: Date that the GO annotation was made (YYYMMDD)
+
+15: Assigned_by: source of the annotation (Mostly MGI in this file).
+
+
+Additional notes:
+
+Column 3 and 10:
+Additional information about nomenclature can be found at 
+http://www.informatics.jax.org/mgihome/nomen/index.shtml
+
+Column 6: These point to MGI reference IDs. A file containing a translation of these IDS to PMIDS can be found on the MGI ftp site
+(ftp.informatics.jax.org)
+
+Column 7: MGI does not use the IEP (inferred from expression patten) evidence code. 
+
+
+Questions about this file should be sent to MGI user support

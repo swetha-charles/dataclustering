@@ -1,0 +1,10 @@
+	
+SP_PIR_KEYWORDS	alternative splicing	RT		81	26.2	7.2E-3	9.0E0
+	UP_SEQ_FEATURE	splice variant	RT		79	25.6	1.9E-2	2.5E1
+	SP_PIR_KEYWORDS	cytoplasm	RT		53	17.2	6.1E-2	5.6E1
+	GOTERM_CC_FAT	plasma membrane	RT		51	16.5	4.4E-2	4.4E1
+	UP_SEQ_FEATURE	topological domain:Cytoplasmic	RT		50	16.2	6.1E-2	6.2E1
+	GOTERM_MF_FAT	nucleotide binding	RT		40	12.9	4.2E-2	4.4E1
+	UP_SEQ_FEATURE	topological domain:Extracellular	RT		40	12.9	7.4E-2	6.9E1
+	GOTERM_MF_FAT	purine nucleotide binding	RT		34	11.0	6.9E-2	6.2E1
+	GOTERM_BP_FAT	regulation of transcription, DNA-dependent	RT		32	10.4	1.1E-2	1.6E1
