@@ -220,7 +220,8 @@ int check_for_cluster_change(struct clusters* original_clusters, struct clusters
 }
 
 /*
-	REQUIRES: that the data is randomly sorted 
+	Clusters given data into given clusters
+	
 	
 
 */
@@ -256,3 +257,37 @@ void initial_clustering(int num_clusters, struct clusters* clusters, struct data
 
 		
 }
+
+
+void display_cluster(struct clusters* cluster, int cluster_no){
+	int size = cluster->current_size[cluster_no];
+
+	int i = 0;
+	for(i = 0 ; i < size; i++){
+		printf("%i\n", ((cluster->cluster_array)[cluster_no])[i]);
+	}
+}
+
+
+void display_cluster_sizes(struct clusters* cluster){
+	int num_clusters = cluster->num_clusters;
+
+	int i = 0;
+
+	for(i = 0 ; i < num_clusters; i ++){
+		printf("Cluster %i, size: %i\n", i,(cluster->current_size)[i]);
+	}
+}
+
+void print_cluster_file(int cluster_no, struct clusters* cluster, FILE* file){
+	int* current_cluster = ((cluster->cluster_array)[cluster_no]);
+	int current_size = ((cluster->current_size)[cluster_no]);
+	int i = 0;
+		
+	for(i = 0; i < current_size; i++){
+		fprintf( file, "%i\n", current_cluster[i]);
+	}
+
+	fclose(file);
+
+} 

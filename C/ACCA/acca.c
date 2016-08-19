@@ -163,7 +163,7 @@ void do_acca(struct data* data, int num_clusters){
 
 	print_data(data);
 	int max_iter = 150;
-	int minimum_repeat = 5;
+	int minimum_repeat = 1;
 	while((repeat == 1) && (iteration < max_iter) && (minimum_repeat > 0)){
 
 
@@ -281,7 +281,7 @@ void do_acca(struct data* data, int num_clusters){
 			} else if((iteration == max_iter) || repeat == 0 || minimum_repeat == 0){
 				
 				if(repeat == 0){
-					printf("\nClusters have <sort of converged>!\n");
+					printf("\nCurrent Clusters: \n");
 					printf("Before old Cluster Sizes\n");
 					display_cluster_sizes(before_original_cluster);
 					printf("Old Cluster Sizes\n");
