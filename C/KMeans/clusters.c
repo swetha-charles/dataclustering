@@ -164,16 +164,16 @@ void reset_cluster(struct clusters* cluster){
 */
 
 int reallocate_memory(struct clusters* clusters, int cluster_no){
-
 	int current_max = clusters->max_size[cluster_no];
-	int* new_cluster_memory = realloc(clusters->cluster_array[cluster_no], current_max * 2 * sizeof(*new_cluster_memory));
+	int new_max = current_max * 2;
+	int* new_cluster_memory = realloc(clusters->cluster_array[cluster_no], sizeof(*new_cluster_memory) * new_max);
 
 	if(new_cluster_memory){
-		clusters->max_size[cluster_no] = current_max*2;
+		clusters->max_size[cluster_no] = new_max;
 		clusters->cluster_array[cluster_no] = new_cluster_memory;
 		return 0;
 	} else {
-		fprintf(stdout, "ERROR: reallocate has failed for\n");
+		fprintf(stdout, "ERROR: reallocate has failed\n");
 		return 1;
 	}
 	
@@ -291,3 +291,6 @@ void print_cluster_file(int cluster_no, struct clusters* cluster, FILE* file){
 	fclose(file);
 
 } 
+
+
+

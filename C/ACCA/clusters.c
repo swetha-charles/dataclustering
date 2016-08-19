@@ -303,15 +303,3 @@ int check_for_cluster_change(struct clusters* original_clusters, struct clusters
 
 }
 
-void print_cluster_file(int cluster_no, struct clusters* cluster, FILE* file){
-	int* current_cluster = ((cluster->cluster_array)[cluster_no]);
-	int current_size = ((cluster->current_size)[cluster_no]);
-	int i = 0;
-		
-	for(i = 0; i < current_size; i++){
-		fprintf( file, "%i\n", current_cluster[i]);
-	}
-
-	fclose(file);
-
-} 

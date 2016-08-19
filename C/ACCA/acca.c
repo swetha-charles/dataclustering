@@ -162,7 +162,7 @@ void do_acca(struct data* data, int num_clusters){
 	int iteration = 0;
 
 	print_data(data);
-	int max_iter = 150;
+	int max_iter = 50;
 	int minimum_repeat = 1;
 	while((repeat == 1) && (iteration < max_iter) && (minimum_repeat > 0)){
 
@@ -293,11 +293,11 @@ void do_acca(struct data* data, int num_clusters){
 
 				int i = 0;
 				for(i = 0; i < num_clusters; i++){
-					char filename[] = "cluster0.txt";
+					char filename[] = "./RESULTS/cluster0.txt";
 					//this will break when you do > 10 clusters, i.e i = 10
-					filename[7] = (char) (i + '0');
+					filename[17] = (char) (1 + '0');
 					char* name = filename; 
-					FILE* file = fopen(name, "w");
+					FILE* file = fopen(name, "ab+");
 					print_cluster_file(i , new_cluster, file);
 				}
 				

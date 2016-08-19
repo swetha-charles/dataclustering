@@ -10,7 +10,7 @@
 
 int main(int argc, char const *argv[])
 {
-	struct data* data = retrieve_data(1000, 3, "DATA/data.txt");
+	struct data* data = retrieve_data(100, 3, "./DATA/data.txt");
 	
 	int no_of_clusters = 7;
 	do_acca(data, no_of_clusters);
