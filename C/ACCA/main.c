@@ -10,9 +10,9 @@
 
 int main(int argc, char const *argv[])
 {
-	struct data* data = retrieve_data(100, 3, "./DATA/data.txt");
+	struct data* data = retrieve_data(55681, 3, "./DATA/data.txt");
 	
-	int no_of_clusters = 7;
+	int no_of_clusters = 100;
 	do_acca(data, no_of_clusters);
 
 	destroy_data_array(data);

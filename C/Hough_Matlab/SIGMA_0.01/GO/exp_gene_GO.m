@@ -6,7 +6,7 @@ load ('GO1_name_sorted.mat', 'GO1_name_sorted');
 
 GO_n = length('GO1_name_sorted');
 
-%select only the from mu_GO and mus_gene_names that were experimented on
+%select only the names from mu_GO and mus_gene_names that were experimented on
 
 load mus_name_GO; %all mouse gene names and it's GO's
 load gene_names.mat % genes experimented on, called VarName2

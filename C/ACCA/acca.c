@@ -157,7 +157,7 @@ void do_acca(struct data* data, int num_clusters){
 
 
 	initial_random_clustering(num_clusters, original_cluster, data);
-	
+	display_cluster_sizes(original_cluster);
 	int repeat = 1;
 	int iteration = 0;
 
@@ -293,9 +293,22 @@ void do_acca(struct data* data, int num_clusters){
 
 				int i = 0;
 				for(i = 0; i < num_clusters; i++){
-					char filename[] = "./RESULTS/cluster0.txt";
-					//this will break when you do > 10 clusters, i.e i = 10
-					filename[17] = (char) (1 + '0');
+					char filename[] = "./RESULTS/cluster000.txt";
+	
+					if(i <9){
+						filename[19] = (char) (i + '0');
+					} else if( i < 99){
+						int j = i/10;
+						filename[18] = (char) ((j%10) + '0');
+						filename[19] = (char) (i%10 + '0');
+					} else {
+						int k = i/100;
+						int j = i/10;
+						filename[17] = (char) ((k%10) + '0');
+						filename[18] = (char) ((j%10) + '0');
+						filename[19] = (char) (i%10 + '0');
+					}
+					
 					char* name = filename; 
 					FILE* file = fopen(name, "ab+");
 					print_cluster_file(i , new_cluster, file);

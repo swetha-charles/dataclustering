@@ -95,10 +95,10 @@ print p_r_alpha_I_x.eps -depsc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure(4)
-load UV_x.dat;
-load UV_y.dat;
-X = [mean(UV_x, 2), mean(UV_y, 2)];
-plot(X(:, 1), X(:, 2), '.');
+load UV_x.txt;
+load UV_y.txt;
+data = [mean(UV_x')', mean(UV_y')'];
+plot(data(:, 1), data(:, 2), '.');
 title('Data');
 print data.eps -depsc
 
