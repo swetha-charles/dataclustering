@@ -1,5 +1,5 @@
-load m_p_r_alpha_I_Data.dat %peter
-load original_posterior_p_r_alpha_given_data.txt%me
+load m_p_r_alpha_I_Data.dat %original probabilities from Peter's old data
+load original_posterior_p_r_alpha_given_data.txt%reimplimentation's run on data 
 
 
 different = 0;

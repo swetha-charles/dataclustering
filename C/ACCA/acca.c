@@ -260,7 +260,14 @@ void do_acca(struct data* data, int num_clusters){
 				set_diff_holder[2] = set_diff_orig_vs_new;
 			}
 
-
+			// FILE* file = fopen("./RESULTS/avgc.txt", "ab+");
+			// //calcualte average correlation within clusters
+			// for(current_cluster = 0; current_cluster < num_clusters; current_cluster++){
+			// 	calculate_average_correlation_within_cluster(new_cluster, data, current_cluster);
+			// 	double average_avgc = calculate_mean_avgc_per_cluster(new_cluster, current_cluster);
+			// 	fprintf(file, "%i ,%f\n", current_cluster, average_avgc);
+			// }
+			// fclose(file);
 
 			iteration++;
 			
@@ -313,7 +320,21 @@ void do_acca(struct data* data, int num_clusters){
 					FILE* file = fopen(name, "ab+");
 					print_cluster_file(i , new_cluster, file);
 				}
+				int size = original_cluster->current_size[0];
+				for(i = 0; i < size; i++){
+					printf("%f\n",((new_cluster->av_similarity_array)[0])[i] );
+				}
+
 				
+				FILE* file = fopen("./RESULTS/avgc.txt", "ab+");
+				//calcualte average correlation within clusters
+				for(current_cluster = 0; current_cluster < num_clusters; current_cluster++){
+					calculate_average_correlation_within_cluster(new_cluster, data, current_cluster);
+					double average_avgc = calculate_mean_avgc_per_cluster(new_cluster, current_cluster);
+					fprintf(file, "%i ,%f\n", current_cluster, average_avgc);
+				}
+				fclose(file);
+
 
 				destroy_clusters(new_cluster);
 				destroy_clusters(original_cluster);
@@ -387,13 +408,15 @@ void calculate_average_correlation_within_cluster(struct clusters* cluster, stru
 			if(comparison_point != current_point){
 				
 				int x_j = current_cluster[comparison_point];
-
-				sum += calculate_pearsons_similarity(x_i, x_j, data);
+				double sim = calculate_pearsons_similarity(x_i, x_j, data);
+				//printf("%f\n", sim);
+				sum += sim;
 			}
 		}
 
+
 		current_av_cluster[current_point] = sum / (current_cluster_size - 1);
-		
+		//printf("%f\n", current_av_cluster[current_point]);
 
 	}
 
@@ -611,4 +634,24 @@ void display_cluster(struct clusters* cluster, int cluster_no){
 	for(i = 0 ; i < size; i++){
 		printf("%i\n", ((cluster->cluster_array)[cluster_no])[i]);
 	}
+}
+
+/*
+	This method taken in a struct of clusters as well as a cluster no. It then 
+	calculates the average avgc for the cluster as a whole
+	@param cluster: struct with avgc calculated per data point
+	@param cluster_no: the cluster number to calculate the average for \
+	@return: double value indicating the average avgc
+
+*/
+double calculate_mean_avgc_per_cluster(struct clusters* cluster, int cluster_no){
+
+	int i = 0;
+	double sum = 0;
+	int size = cluster->current_size[cluster_no];
+	for( i = 0 ; i < size; i++){
+		sum += ((cluster->av_similarity_array)[cluster_no])[i];
+	}
+
+	return (sum / size);
 }

@@ -58,7 +58,7 @@ struct ht_results* do_ht(struct data *data, struct prior_parameters *prior_param
 		double x1 = data->data_x_mean[i];
 		double x2 = data->data_y_mean[i];
 
-		//fprintf(stdout, "%i\n", i);
+		fprintf(stdout, "%i\n", i);
 		get_posterior(x1, x2,i, prior_parameters->variance_of_data, priors, ht_results, alphas_and_radii, data);
 
 	}

@@ -78,9 +78,12 @@ void reset_cluster(struct clusters* cluster);
 int reallocate_memory(struct clusters* clusters, int cluster_no);
 void randomise_cluster(struct clusters* cluster);
 int check_for_cluster_change(struct clusters* original_clusters, struct clusters* new_clusters);
+double calculate_mean_avgc_per_cluster(struct clusters* cluster, int cluster_no);
+
 
 void display_cluster(struct clusters* cluster, int cluster_no);
 void display_cluster_sizes(struct clusters* cluster);
 
 //Tests: Only holds the suites of the unit tests
 void suite_tests_cluster();
+void suite_tests_avgc();

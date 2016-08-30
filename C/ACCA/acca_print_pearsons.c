@@ -43,7 +43,7 @@ void print_av_sim(){
    	
    	FILE* av_sim = fopen("av_sim_cluster_0.txt", "w");
 
-	calculate_average_correlation_for_cluster(original_clusters, data, 0);
+	calculate_average_correlation_within_cluster(original_clusters, data, 0);
 
 	float **av_similarity_array = original_clusters->av_similarity_array;
 	int current_cluster_size = (original_clusters->current_size)[0];
