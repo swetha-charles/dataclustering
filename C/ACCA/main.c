@@ -10,12 +10,14 @@
 
 int main(int argc, char const *argv[])
 {
-	struct data* data = retrieve_data(55681, 3, "./DATA/data.txt");
+	struct data* data = retrieve_data(30918, 4, "./DATA/data_means.csv");
 	
-	int no_of_clusters = 100;
+	int no_of_clusters = 165;
 	do_acca(data, no_of_clusters);
 
 	destroy_data_array(data);
  	
+
 	return 0;
 }
+

@@ -44,7 +44,9 @@ struct priors;
 void calculate_priors();
 struct priors *create_prior_arrays(int no_of_alphas, int no_of_radii);
 double calculate_p_alpha(double alpha, double ca);
+double calculate_passive_p_alpha(double alpha, double ca);
 double calculate_prior_r_given_alpha(double radius, double alpha, double cr, double w1, double w2);
+double calculate_passive_prior_r_given_alpha(double radius, double alpha, double cr, double w1, double w2);
 void destroy_priors(struct priors *priors);
 
 //process data

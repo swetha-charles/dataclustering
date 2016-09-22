@@ -39,6 +39,9 @@ void destroy_data_array(struct data* data){
     free(data);
 }
 
+/*
+  Built off an answer in stack overflow 
+*/
 struct data* retrieve_data(int no_of_data_points, int columns,  char* filename){
 
     struct data *data = create_data_array(no_of_data_points, columns);

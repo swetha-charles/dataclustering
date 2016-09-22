@@ -42,11 +42,13 @@ void destroy_data_array(struct data* data);
 void reset_cluster(struct clusters* cluster);
 
 //Kmeans
+float calculate_euclidean_distance(float x1, float y1, float z1, float x2, float y2, float z2);
 int calculate_best_cluster(int data_index, struct data* data, float* centroids, int num_clusters, int num_columns);
 float* initial_random_set_centroids(int num_clusters, int num_columns, struct data* data);
 void move_index_to_new_cluster(struct clusters* clusters, int cluster_no, int data_index);
 float* calculate_means_of_cluster(struct clusters* cluster, int cluster_no, struct data *data, float* mean);
 void do_kmeans(int num_clusters, struct data* data);
+float calculate_average_error(struct clusters* cluster, struct data* data , int cluster_no, float* centroids);
 
 //Testing suites
 int update_result(int result, int update_val);

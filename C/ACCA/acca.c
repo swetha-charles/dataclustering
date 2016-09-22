@@ -162,7 +162,7 @@ void do_acca(struct data* data, int num_clusters){
 	int iteration = 0;
 
 	print_data(data);
-	int max_iter = 50;
+	int max_iter = 100;
 	int minimum_repeat = 1;
 	while((repeat == 1) && (iteration < max_iter) && (minimum_repeat > 0)){
 
